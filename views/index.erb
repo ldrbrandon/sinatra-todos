@@ -1,8 +1,13 @@
 <form method="post">
   <label>New Todo
-   <input type="text" value="todos">
+   <input type="text" name="todos">
     <input type="submit" value="Create Todo">
   </label>
 </form>
 <h1>Here's all the things to do:</h1>
 <!-- <p> Take out the trash </p> -->
+<ul>
+  <% @todos.each do |todo|  %>
+<li> <%= todo.name %> </li>
+<% end %>
+</ul>

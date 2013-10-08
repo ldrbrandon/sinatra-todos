@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.expand_path('.'))
 
 require 'sinatra'
 require 'sinatra/activerecord'
-
+require 'shotgun'
 require 'models/todo'
 
 begin
@@ -16,10 +16,11 @@ end
 set :database, ENV['DATABASE_URL']
 
 get '/' do
+  @todos = Todo.all
   erb :index
 end
 
 post '/' do
-  Todo.create(name: params["todos"])
+  Todo.create(:name => params["todos"])
   redirect '/'
 end
