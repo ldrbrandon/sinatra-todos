@@ -1,13 +1,57 @@
-<form method="post">
-  <label>New Todo
-   <input type="text" name="todos">
-    <input type="submit" value="Create Todo">
-  </label>
-</form>
-<h1>Here's all the things to do:</h1>
-<!-- <p> Take out the trash </p> -->
-<ul>
-  <% @todos.each do |todo|  %>
-<li> <%= todo.name %> </li>
-<% end %>
-</ul>
+<html>
+<head>
+  <title>Sinatra Todos</title>
+  <!--<link rel="stylesheet" type="text/css" href="../theme/bender-buster/bender-buster.css"> !-->
+  <style type="text/css">
+  .container {
+    margin: 0px auto;
+    width: 60%;
+
+  }
+  .task {
+
+  }
+  .task.completed {
+    text-decoration: line-through;
+    font-style: italic;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form method="post">
+      <label>New Todo
+       <input type="text" name="todos">
+       <input type="submit" value="Create Todo">
+     </label>
+   </form>
+   <h1>Here's all the things to do:</h1>
+
+
+   <ul>
+    <% @todos.each do |todo|  %>
+
+    <li>
+      <form method="post" action="/complete/<%= todo.id %>"> 
+        <%= todo.name %> <input type="submit" value="Complete <%= todo.name %>">
+      </form>
+    </li>
+
+    <% end %>
+  </ul>
+
+  <hr />
+  <h3>Completed</h3>
+
+  <ul>
+    <% @todones.each do |done|  %>
+
+    <li class="task completed"><%= done.name %></li>
+
+    <% end %>
+  </ul>
+
+</div>
+</body>
+</html>
